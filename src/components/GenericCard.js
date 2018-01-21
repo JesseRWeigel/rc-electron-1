@@ -10,7 +10,7 @@ import {
 } from 'material-ui/Card'
 
 export class GenericCard extends Component {
-  render () {
+  render() {
     const { link, className } = this.props
     const CardContent = ({
       actions,
@@ -37,7 +37,7 @@ export class GenericCard extends Component {
         )}
 
         {mediaImgSrc && (
-          <CardMedia className='img-container' overlay={overlay}>
+          <CardMedia className="img-container" overlay={overlay}>
             <img src={mediaImgSrc} alt={mediaImgAlt} />
           </CardMedia>
         )}
@@ -52,7 +52,7 @@ export class GenericCard extends Component {
           {children}
         </CardText>
         {actions && (
-          <CardActions className='card-actions'>{actions}</CardActions>
+          <CardActions className="card-actions">{actions}</CardActions>
         )}
       </Card>
     )
@@ -64,10 +64,9 @@ export class GenericCard extends Component {
         <CardContent {...this.props} />
       </Link>
     ) : (
-      <a href={link} rel='noopener noreferrer' target='_blank'>
+      <a href={link} rel="noopener noreferrer" target="_blank">
         <CardContent {...this.props} />
       </a>
-
     ) : (
       <CardContent {...this.props} />
     )

@@ -25,8 +25,8 @@ import {
 const fileExtensions =
   'application/vnd.rar, application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/vnd.openxmlformats-officedocument.presentationml.presentation, audio/mp4, audio/mpeg, text/plain, application/zip, video/quicktime, video/avi, audio/wav, image/jpeg, application/octet-stream, image/png'
 
-const PORT = process.env.SERVER_PORT || 9000
-const HOST = process.env.UPLOADS_HOST || window.location.host.split(':')[0]
+const PORT = ''
+const HOST = 'rc.franciscan.edu'
 const UPLOAD_URL =
   process.env.NODE_ENV === 'production'
     ? `https://${HOST}/uploads`
@@ -42,7 +42,7 @@ const styles = {
 
 // https://github.com/Dogfalo/materialize/blob/master/js/forms.js#L192
 class ServiceRequest extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     const checkboxProps = [...leftCheckboxes, ...rightCheckboxes].reduce(
       (acc, label, index) => ({
@@ -97,7 +97,7 @@ class ServiceRequest extends Component {
       .split(' ')
       .join('-')
 
-  handleInputChange (event) {
+  handleInputChange(event) {
     const target = event.target
     const value = target.type === 'checkbox' ? target.checked : target.value
     const name = target.name
@@ -172,17 +172,17 @@ class ServiceRequest extends Component {
     this.setState({ resultDialogOpen: false })
   }
 
-  render () {
+  render() {
     const fileValue = this.state.form.fileInput || 'Select a file to upload'
 
     return (
-      <div className='container'>
+      <div className="container">
         <Helmet>
           <title>Service Request | Resource Center</title>
-          <script src='https://cdn.polyfill.io/v2/polyfill.min.js?features=def‌​ault,es6,Object.entries,Array.from,DocumentFragment.prototype.append,Element.prototype.append,Document&flags=gated' />
+          <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=def‌​ault,es6,Object.entries,Array.from,DocumentFragment.prototype.append,Element.prototype.append,Document&flags=gated" />
         </Helmet>
-        <div className='row'>
-          <div className='col s12 flow-text'>
+        <div className="row">
+          <div className="col s12 flow-text">
             <h2 style={{ marginBottom: 0 }}>
               Please use this form to request services.
             </h2>
@@ -193,13 +193,13 @@ class ServiceRequest extends Component {
             </span>
           </div>
         </div>
-        <div className='row'>
+        <div className="row">
           <Formsy.Form
             onValidSubmit={this.handleFormData}
             onInvalidSubmit={this.notifyFormError}
           >
             {singleLineFields.map((field, index) => (
-              <div className='col s12 m6' key={index}>
+              <div className="col s12 m6" key={index}>
                 <FormsyText
                   floatingLabelText={
                     field.required ? field.name + ' *' : field.name
@@ -212,12 +212,12 @@ class ServiceRequest extends Component {
                   required={field.required}
                   validations={field.type}
                   validationError={field.error}
-                  className='formsy-input'
+                  className="formsy-input"
                 />
               </div>
             ))}
             {multiLineFields.map((field, index) => (
-              <div className='col s12 m6' key={index}>
+              <div className="col s12 m6" key={index}>
                 <FormsyText
                   floatingLabelText={
                     field.required ? field.name + ' *' : field.name
@@ -231,55 +231,55 @@ class ServiceRequest extends Component {
                   required={field.required}
                   validations={field.type}
                   validationError={field.error}
-                  className='formsy-multiline'
+                  className="formsy-multiline"
                 />
               </div>
             ))}
             <div
-              className='col s12 m6'
+              className="col s12 m6"
               style={{ marginTop: '16px', marginBottom: '16px' }}
             >
-              <DatePicker hintText='Desired Completion Date' />
+              <DatePicker hintText="Desired Completion Date" />
             </div>
             <div
-              className='col s12 m6 file-upload'
+              className="col s12 m6 file-upload"
               style={{ marginBottom: '16px' }}
             >
-              <label htmlFor='upload' className='file-field input-field'>
-                <div className='btn'>
+              <label htmlFor="upload" className="file-field input-field">
+                <div className="btn">
                   <span>Upload Files</span>
                   <input
-                    id='upload'
-                    name='upload[]'
-                    type='file'
+                    id="upload"
+                    name="upload[]"
+                    type="file"
                     multiple
                     accept={fileExtensions}
                     onChange={this.handleFilePath}
                     ref={input => {
                       this.uploadInput = input
                     }}
-                    className='formsy-input'
+                    className="formsy-input"
                   />
                 </div>
-                <div className='file-path-wrapper'>
+                <div className="file-path-wrapper">
                   <FormsyText
-                    className='file-path validate formsy-multiline'
+                    className="file-path validate formsy-multiline"
                     value={fileValue}
                     multiLine
                     rows={1}
                     fullWidth
                     readOnly
-                    name='upload-text-field'
-                    id='file-path-field'
+                    name="upload-text-field"
+                    id="file-path-field"
                     validations={{
                       myCustomIsFiveValidation: () => this.state.form.fileValid
                     }}
-                    validationError='Error'
+                    validationError="Error"
                   />
                 </div>
               </label>
             </div>
-            <div className='col s12 m6 checkbox-col'>
+            <div className="col s12 m6 checkbox-col">
               {leftCheckboxes.map((label, index) => (
                 <div key={index}>
                   <IconCheckbox
@@ -291,7 +291,7 @@ class ServiceRequest extends Component {
                     style={styles.checkbox}
                     inputStyle={styles.inputStyle}
                     src={infoLogo}
-                    alt='Info Button'
+                    alt="Info Button"
                     icon={label.icon ? label.icon : false}
                     dialogText={label.dialogText && label.dialogText}
                     dialogTitle={label.dialogTitle && label.dialogTitle}
@@ -313,14 +313,14 @@ class ServiceRequest extends Component {
                         required={field.required}
                         validations={field.type}
                         validationError={field.error}
-                        className='formsy-input'
+                        className="formsy-input"
                         style={{ margin: '0 0 8px 0' }}
                       />
                     ))}
                 </div>
               ))}
             </div>
-            <div className='col s12 m6 checkbox-col'>
+            <div className="col s12 m6 checkbox-col">
               {rightCheckboxes.map((label, index) => (
                 <div key={index}>
                   <IconCheckbox
@@ -332,7 +332,7 @@ class ServiceRequest extends Component {
                     style={styles.checkbox}
                     inputStyle={styles.inputStyle}
                     src={infoLogo}
-                    alt='Info Button'
+                    alt="Info Button"
                     icon={label.icon ? label.icon : false}
                     dialogText={label.dialogText && label.dialogText}
                     dialogTitle={label.dialogTitle && label.dialogTitle}
@@ -354,35 +354,35 @@ class ServiceRequest extends Component {
                         required={field.required}
                         validations={field.type}
                         validationError={field.error}
-                        className='formsy-input'
+                        className="formsy-input"
                         style={{ margin: '0 0 8px 0' }}
                       />
                     ))}
                 </div>
               ))}
             </div>
-            <div className='col s12' style={{ marginTop: '16px' }}>
+            <div className="col s12" style={{ marginTop: '16px' }}>
               <RaisedButton
-                label='Submit'
-                type='submit'
-                id='submit-button'
+                label="Submit"
+                type="submit"
+                id="submit-button"
                 buttonStyle={{
                   cursor: this.state.canSubmit ? 'pointer' : 'not-allowed'
                 }}
                 primary
                 disabled={!this.state.canSubmit}
               />
-              <div id='planning-guide-checkbox'>
+              <div id="planning-guide-checkbox">
                 <FormsyCheckbox
-                  name='planning-guide-check'
+                  name="planning-guide-check"
                   required
                   label={
                     <span>
                       I have read the{' '}
                       <Link
-                        to='/planning-guide'
-                        target='_blank'
-                        rel='noopener noreferrer'
+                        to="/planning-guide"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         style={{ fontWeight: 500 }}
                       >
                         Planning Guide
@@ -398,7 +398,7 @@ class ServiceRequest extends Component {
             </div>
           </Formsy.Form>
         </div>
-        <Dialog title='Loading...' modal open={this.state.loadingDialogOpen}>
+        <Dialog title="Loading..." modal open={this.state.loadingDialogOpen}>
           Sending service request
         </Dialog>
         <Dialog
@@ -408,7 +408,7 @@ class ServiceRequest extends Component {
           onRequestClose={this.handleDialogClose}
           actions={[
             <FlatButton
-              label='Ok'
+              label="Ok"
               onTouchTap={this.handleDialogClose}
               keyboardFocused
             />

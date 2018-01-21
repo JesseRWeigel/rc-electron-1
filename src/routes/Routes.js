@@ -1,7 +1,7 @@
 import '../styles/App.css'
 import '../styles/materialize-grid.css'
 import React from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 
 /* Material-UI */
@@ -35,19 +35,21 @@ const Routes = () => {
         <MuiThemeProvider muiTheme={getMuiTheme(fusTheme)}>
           <div>
             <SideNav />
+            {window.location.pathname.includes('index.html') && (
+              <Redirect to="/" />
+            )}
             <Switch>
-              <Route exact path='/' component={Home} />
-
-              <Route path='/logos' component={Logos} />
-              <Route path='/posters' component={Posters} />
-              <Route path='/letterhead' component={Letterhead} />
-              <Route path='/share-a-story' component={Story} />
-              <Route path='/planning-guide' component={PlanningGuide} />
-              <Route path='/glossary' component={Glossary} />
-              <Route path='/services' component={Services} />
-              <Route path='/service-request-form' component={ServiceRequest} />
-              <Route path='/tutorial' component={Tutorial} />
-              <Route path='/poster-videos' component={PosterVideos} />
+              <Route exact path="/" component={Home} />
+              <Route path="/logos" component={Logos} />
+              <Route path="/posters" component={Posters} />
+              <Route path="/letterhead" component={Letterhead} />
+              <Route path="/share-a-story" component={Story} />
+              <Route path="/planning-guide" component={PlanningGuide} />
+              <Route path="/glossary" component={Glossary} />
+              <Route path="/services" component={Services} />
+              <Route path="/service-request-form" component={ServiceRequest} />
+              <Route path="/tutorial" component={Tutorial} />
+              <Route path="/poster-videos" component={PosterVideos} />
               <Route component={NotFound} />
             </Switch>
           </div>

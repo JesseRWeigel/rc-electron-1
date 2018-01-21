@@ -2,17 +2,13 @@
   "name": "resource-center",
   "version": "0.1.0",
   "private": true,
+  "description": "FUS Resource center",
+  "author": "Jesse Weigel <jesseweigel@gmail.com>",
+  "homepage": "./",
   "dependencies": {
-    "@sendgrid/mail": "^6.1.4",
-    "electron": "^1.6.11",
-    "file-type": "^6.1.0",
-    "formidable": "^1.1.1",
     "formsy-material-ui": "^0.6.2",
     "formsy-react": "^0.19.5",
-    "gh-pages": "^1.0.0",
     "material-ui": "^0.18.6",
-    "node-sass": "^4.5.3",
-    "nodemon": "^1.11.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-ga": "^2.2.0",
@@ -21,36 +17,78 @@
     "react-router-dom": "^4.1.2",
     "react-scripts": "1.0.17",
     "react-tap-event-plugin": "^2.0.1",
-    "typeface-roboto": "^0.0.35",
-    "xss-filters": "^1.2.7"
+    "typeface-roboto": "^0.0.35"
   },
+  "main": "src/electron.js",
   "scripts": {
+    "electron": "electron .",
+    "electron-dev": "ELECTRON_START_URL=http://localhost:3000 electron .",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
-    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
+    "build-css":
+      "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
+    "watch-css":
+      "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",
     "start-server": "nodemon server.js -w server.js",
     "start": "npm-run-all -p watch-css start-js start-server",
-    "build": "npm run build-css && react-scripts build",
+    "build": "npm run build-css && react-scripts build && mv build/ react/",
     "test": "react-scripts test --env=jsdom",
     "test-without-watch": "cross-env CI=true npm test",
     "eject": "react-scripts eject",
-    "lint": "prettier 'src/**/*.js' 'src/components/**/*.js' '*.js' --write --single-quote --no-semi && standard --fix",
-    "precommit": "lint-staged && npm run test-without-watch"
+    "lint":
+      "prettier 'src/**/*.js' 'src/components/**/*.js' '*.js' --write --single-quote --no-semi && standard --fix",
+    "precommit": "lint-staged && npm run test-without-watch",
+    "pack": "build --dir",
+    "dist": "build -w -m -l"
   },
   "devDependencies": {
+    "@sendgrid/mail": "^6.1.4",
     "babel-eslint": "^7.2.3",
     "cross-env": "^5.0.1",
+    "electron": "^1.7.10",
+    "electron-builder": "^19.54.0",
+    "formidable": "^1.1.1",
+    "gh-pages": "^1.0.0",
     "husky": "^0.14.3",
     "lint-staged": "^4.0.2",
     "nightmare": "^2.10.0",
     "nightmare-upload": "^0.1.1",
     "node-fetch": "^1.7.1",
+    "node-sass": "^4.5.3",
     "node-sass-chokidar": "^0.0.3",
+    "nodemon": "^1.11.0",
     "npm-run-all": "^4.0.2",
     "prettier": "^1.5.3",
-    "standard": "^10.0.2"
+    "standard": "^10.0.2",
+    "xss-filters": "^1.2.7"
+  },
+  "build": {
+    "productName": "Resource Center",
+    "appId": "university.franciscan.rc",
+    "dmg": {
+      "icon": "build/icon.icns",
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": ["deb"],
+      "icon": "build/icon.png"
+    },
+    "win": {
+      "target": "NSIS",
+      "icon": "build/icon.ico"
+    }
   },
   "lint-staged": {
     "*.js": [

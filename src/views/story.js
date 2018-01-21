@@ -7,15 +7,15 @@ import { Helmet } from 'react-helmet'
 import '../styles/responsive-text.css'
 import { logPageView } from '../utils/analytics'
 
-const PORT = process.env.UPLOADS_PORT || 9000
-const HOST = process.env.UPLOADS_HOST || window.location.host.split(':')[0]
+const PORT = ''
+const HOST = 'rc.franciscan.university'
 const UPLOAD_URL =
   process.env.NODE_ENV === 'production'
     ? `https://${HOST}/story-form`
     : `http://${HOST}:${PORT}/story-form`
 
 class Story extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.singleLineFields = ['Name', 'Email']
     this.multiLineFields = ['Story']
@@ -53,7 +53,7 @@ class Story extends Component {
       .split(' ')
       .join('-')
 
-  handleInputChange (event) {
+  handleInputChange(event) {
     const target = event.target
     const value = target.type === 'checkbox' ? target.checked : target.value
     const name = target.name
@@ -104,9 +104,9 @@ class Story extends Component {
     this.setState({ resultDialogOpen: false })
   }
 
-  render () {
+  render() {
     const SingleLineField = (label, index) => (
-      <div className='col s12 m6' key={index}>
+      <div className="col s12 m6" key={index}>
         <TextField
           floatingLabelText={label}
           name={this.formatLabelToProperty(label)}
@@ -118,7 +118,7 @@ class Story extends Component {
       </div>
     )
     const MultiLineField = (label, index) => (
-      <div className='col s12' key={index}>
+      <div className="col s12" key={index}>
         <TextField
           floatingLabelText={label}
           name={this.formatLabelToProperty(label)}
@@ -133,16 +133,16 @@ class Story extends Component {
     )
 
     return (
-      <div className='container'>
+      <div className="container">
         <Helmet>
           <title>Story | Resource Center</title>
-          <script src='https://cdn.polyfill.io/v2/polyfill.min.js?features=def‌​ault,es6,Object.entries,Document&flags=gated' />
+          <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=def‌​ault,es6,Object.entries,Document&flags=gated" />
         </Helmet>
-        <div className='row flow-text'>
-          <div className='col s12'>
+        <div className="row flow-text">
+          <div className="col s12">
             <h2 style={{ marginBottom: 0 }}>Suggest a Story</h2>
           </div>
-          <div className='col s12'>
+          <div className="col s12">
             <p>
               The Marketing and Communications Department shares the
               accomplishments of Franciscan University faculty, students, staff,
@@ -170,22 +170,22 @@ class Story extends Component {
             </p>
           </div>
         </div>
-        <div className='row'>
+        <div className="row">
           {this.singleLineFields.map((label, index) =>
             SingleLineField(label, index)
           )}
           {this.multiLineFields.map((label, index) =>
             MultiLineField(label, index)
           )}
-          <div className='col s12'>
+          <div className="col s12">
             <RaisedButton
-              label='Submit'
+              label="Submit"
               onClick={this.handleFormData}
               primary
             />
           </div>
         </div>
-        <Dialog title='Loading...' modal open={this.state.loadingDialogOpen}>
+        <Dialog title="Loading..." modal open={this.state.loadingDialogOpen}>
           Sending story
         </Dialog>
         <Dialog
@@ -195,7 +195,7 @@ class Story extends Component {
           onRequestClose={this.handleDialogClose}
           actions={[
             <FlatButton
-              label='Ok'
+              label="Ok"
               onTouchTap={this.handleDialogClose}
               keyboardFocused
             />
